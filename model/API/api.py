@@ -29,6 +29,8 @@ def predict_phishing(data: URLInput):
     X = np.array(features).reshape(1, -1)
     pred = model.predict(X)[0]
 
-    result = "Yes" if pred == 0 else "No"  # 0 = phishing, 1 = legitimate
+    is_phishing = (pred == -1) or (pred == 0) # 0 = phishing, 1 = legitimate
+    print(features)
 
-    return {"url": url, "phishing": result}
+
+    return {"url": url, "phishing":  "Yes" if is_phishing else "No"}
